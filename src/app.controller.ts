@@ -4,7 +4,7 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
 
   @Get()
-  getHello(): any {
+  getStatus(): any {
     return {
       status: "Running"
     }

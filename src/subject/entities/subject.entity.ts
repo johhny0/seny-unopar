@@ -17,6 +17,6 @@ export class Subject {
     @ManyToOne(() => Course, course => course.subjects)
     course: Course;
 
-    @OneToMany(() => Activity, activity => activity.subject)
+    @OneToMany(() => Activity, activity => activity.subject, { cascade: true })
     activities: Activity[];
 }
