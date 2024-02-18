@@ -2,5 +2,5 @@
 
 
 ## Commands 
-typeorm migration:create src/migrations/<ChangeName>
+typeorm migration:create src/migrations/**ChangeName**
 
