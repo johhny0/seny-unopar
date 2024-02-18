@@ -9,8 +9,8 @@ export class CourseTable1708230648080 implements MigrationInterface {
         const table = new Table({
             name: this.tableName,
             columns: [
-                { name: "id", type: "BINARY(16)", isPrimary: true, isUnique: true },
-                { name: "name", type: "varchar(50)", isUnique: true },
+                { name: "id", type: "varchar(36)", isPrimary: true, isUnique: true },
+                { name: "name", type: "varchar(150)", isUnique: true },
             ]
         });
         await queryRunner.createTable(table, this.ifNotExists);

@@ -15,7 +15,7 @@ export const dataSourceOptions: DataSourceOptions = {
     database: process.env.DATABASE_NAME,
     entities: [Course, Subject, Activity],
     synchronize: false,
-    migrations: ["./migrations/*{.ts,.js}"],
+    migrations: ["dist/migrations/**/*{.ts,.js}"],
     logging: true,
     migrationsRun: true,
     migrationsTableName: "migrations",

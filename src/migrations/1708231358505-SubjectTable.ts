@@ -10,9 +10,10 @@ export class SubjectTable1708231358505 implements MigrationInterface {
         const table = new Table({
             name: this.tableName,
             columns: [
-                { name: "id", type: "BINARY(16)", isPrimary: true, isUnique: true },
-                { name: "name", type: "varchar(50)", isUnique: true },
-                { name: "course_id", type: "BINARY(16)" },
+                { name: "id", type: "varchar(36)", isPrimary: true, isUnique: true },
+                { name: "name", type: "varchar(150)", isUnique: true },
+                { name: "semester", type: "int(1)" },
+                { name: "courseId", type: "varchar(36)" },
             ]
         });
 
@@ -21,7 +22,7 @@ export class SubjectTable1708231358505 implements MigrationInterface {
         const fkCourse = new TableForeignKey({
             referencedColumnNames: ["id"],
             referencedTableName: "course",
-            columnNames: ["course_id"],
+            columnNames: ["courseId"],
             onDelete: "CASCADE",
             name: this.fkName
         });
