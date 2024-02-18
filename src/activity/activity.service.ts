@@ -3,7 +3,7 @@ import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Activity } from './entities/activity.entity';
-import { Repository } from 'typeorm';
+import { LessThan, MoreThan, Repository } from 'typeorm';
 
 @Injectable()
 export class ActivityService {
@@ -46,4 +46,49 @@ export class ActivityService {
 
     return result.affected > 0;
   }
+
+  async done(id: string) {
+    const result = await this.activityRepository.update(id, {
+      done: true
+    });
+
+    return result.affected > 0;
+  }
+
+  async findBySemester(semester: number) {
+    console.log({ semester });
+
+    return await this.activityRepository.find({
+      where: {
+        subject: {
+          semester
+        }
+      }
+    });
+  }
+
+  async started(){
+    const now = new Date();
+
+    return await this.activityRepository.find({ 
+      where: { 
+        startDate: LessThan(now),
+        endDate: MoreThan(now),
+        done: false
+      }
+    })
+  }
+
+  async outdated(){
+    const now = new Date();
+
+    return await this.activityRepository.find({ 
+      where: { 
+        startDate: LessThan(now),
+        endDate: LessThan(now),
+        done: false
+      }
+    })
+  }
+
 }

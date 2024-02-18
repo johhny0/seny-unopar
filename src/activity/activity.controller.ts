@@ -1,11 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
 
 @Controller('activity')
 export class ActivityController {
-  constructor(private readonly activityService: ActivityService) {}
+  constructor(private readonly activityService: ActivityService) { }
+
+  @Get("started")
+  started() {
+    return this.activityService.started();
+  }
+
+  @Get("outdated")
+  outdated() {
+    return this.activityService.outdated();
+  }
+  
 
   @Post()
   create(@Body() createActivityDto: CreateActivityDto) {
@@ -31,4 +42,17 @@ export class ActivityController {
   remove(@Param('id') id: string) {
     return this.activityService.remove(id);
   }
+
+  @Patch(':id/done')
+  done(@Param("id") id: string) {
+    return this.activityService.done(id);
+  }
+
+  @Get("semester/:semester")
+  findBySemester(@Param("semester") semester: number) {
+    return this.activityService.findBySemester(+semester);
+  }
+
+
+
 }
