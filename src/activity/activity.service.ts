@@ -56,8 +56,6 @@ export class ActivityService {
   }
 
   async findBySemester(semester: number) {
-    console.log({ semester });
-
     return await this.activityRepository.find({
       where: {
         subject: {
@@ -74,19 +72,37 @@ export class ActivityService {
       where: { 
         startDate: LessThan(now),
         endDate: MoreThan(now),
-        done: false
+        done: false,
       }
     })
   }
 
-  async outdated(){
+  async outdated(semester: number){
     const now = new Date();
 
     return await this.activityRepository.find({ 
       where: { 
         startDate: LessThan(now),
         endDate: LessThan(now),
-        done: false
+        done: false,
+        subject: {
+          semester
+        }
+      }
+    })
+  }
+
+  async upcoming(semester: number){
+    const now = new Date();
+
+    return await this.activityRepository.find({ 
+      where: { 
+        startDate: MoreThan(now),
+        endDate: MoreThan(now),
+        done: false,
+        subject: {
+          semester
+        }
       }
     })
   }
