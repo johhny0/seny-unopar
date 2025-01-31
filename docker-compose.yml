@@ -1,0 +1,20 @@
+services:
+  unopar:
+    container_name: seny-unopar
+    build:
+      context: .
+      target: build
+    volumes:
+    - ./:/app
+    - /app/node_modules
+    ports:
+    - 3003:3003
+    command: npm run start
+    networks:
+      - seny-network-unopar
+      
+networks:
+  seny-network-unopar:
+    driver: bridge
+    name: seny-network
+    external: true
